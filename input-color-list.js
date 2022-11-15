@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     menu.style.visibility = "hidden";
 
     for (let color of input.list?.options) {
-      console.log(color);
       const colorValue = color.value;
       const item = menu.appendChild(document.createElement("li"));
       item.style.backgroundColor = colorValue;
