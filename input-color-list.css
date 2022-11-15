@@ -1,0 +1,31 @@
+input[type="color"][list] + menu {
+  box-sizing: content-box;
+  list-style-type: none;
+  position: absolute;
+  /* max-inline-size: calc(8 * 1.75rem - 0.25rem); */
+  max-inline-size: 13.75rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.25rem;
+  border: 0.0625rem solid grey;
+  border-radius: 0.25rem;
+  background-color: white;
+  box-shadow: 0 0.25rem 0.5rem #0008;
+}
+
+input[type="color"][list] + menu > li {
+  box-sizing: border-box;
+  block-size: 1.5rem;
+  inline-size: 1.5rem;
+  border: 0.0625rem solid grey;
+  border-radius: 0.125rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+input[type="color"][list] + menu > li:last-child {
+  margin-inline-start: auto;
+}
