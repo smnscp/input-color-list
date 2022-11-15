@@ -5,34 +5,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let input of colorInputsWithList) {
     const menu = document.createElement("menu");
-    menu.style.visibility = "hidden";
+    menu.toggle = function () {
+      this.hidden = !this.hidden;
+    };
+    menu.toggle();
 
-    for (let color of input.list?.options) {
+    menu.addItem = function (label, action) {
+      const item = this.appendChild(document.createElement("li"));
+      item.innerText = label;
+      item.onclick = action;
+      return item;
+    };
+
+    for (let color of input.list.options) {
       const colorValue = color.value;
-      const item = menu.appendChild(document.createElement("li"));
+      const item = menu.addItem("", () => (input.value = colorValue));
       item.style.backgroundColor = colorValue;
-      item.onclick = () => {
-        input.value = colorValue;
-      };
     }
 
-    const extraItem = menu.appendChild(document.createElement("li"));
-    extraItem.innerText = "…";
-    extraItem.onclick = () => input.click();
-
-    const closeItem = menu.appendChild(document.createElement("li"));
-    closeItem.innerText = "✕";
-    closeItem.onclick = () => menu.style.visibility = "hidden";
+    menu.addItem("…", () => {
+      input.showPicker();
+      menu.toggle();
+    });
+    menu.addItem("✕", () => menu.toggle());
 
     input.after(menu);
-
     input.onclick = (e) => {
-      if (menu.style.visibility == "hidden") {
-        menu.style.visibility = "visible";
-        e.preventDefault();
-      } else {
-        menu.style.visibility = "hidden";
-      }
+      e.preventDefault();
+      menu.toggle();
     };
   }
 });

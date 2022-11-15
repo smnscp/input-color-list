@@ -1,3 +1,7 @@
+input[type="color"][list] + menu[hidden] {
+  visibility: hidden;
+}
+
 input[type="color"][list] + menu {
   box-sizing: content-box;
   list-style-type: none;
