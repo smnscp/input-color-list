@@ -21,6 +21,7 @@ input[type="color"][list] + menu {
 }
 
 input[type="color"][list] + menu > li {
+  position: relative;
   box-sizing: border-box;
   block-size: 1.5rem;
   inline-size: 1.5rem;
@@ -31,6 +32,25 @@ input[type="color"][list] + menu > li {
   cursor: pointer;
 }
 
-input[type="color"][list] + menu > li:last-child {
+input[type="color"][list] + menu > li:nth-last-child(n + 3) {
+  /* https://stackoverflow.com/a/65887831 */
+  --checker-color-1: #fff;
+  --checker-color-2: #ccc;
+  --checker-size: 0.25rem;
+  --checker-gradient: linear-gradient(45deg, var(--checker-color-1) 25%, transparent 25%, transparent 75%, var(--checker-color-1) 75%);
+  background-color: var(--checker-color-2);
+  background-image: var(--checker-gradient), var(--checker-gradient);
+  background-position: 0 0, var(--checker-size) var(--checker-size);
+  background-size: calc(var(--checker-size) * 2) calc(var(--checker-size) * 2);
+}
+
+input[type="color"][list] + menu > li:nth-last-child(n + 3)::before {
+  content: '';
+  position: absolute;
+  background-color: currentColor;
+  inset: 0;
+}
+
+input[type="color"][list] + menu > li:nth-last-child(1) {
   margin-inline-start: auto;
 }

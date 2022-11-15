@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let color of input.list.options) {
       const colorValue = color.value;
       const item = menu.addItem("", () => (input.value = colorValue));
-      item.style.backgroundColor = colorValue;
+      item.style.color = colorValue;
     }
 
     menu.addItem("…", () => {
