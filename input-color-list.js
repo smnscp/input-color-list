@@ -18,9 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     for (let color of input.list.options) {
-      const colorValue = color.value;
-      const item = menu.addItem("", () => (input.value = colorValue));
-      item.style.color = colorValue;
+      const colorValue = color.value.slice(0, 7);
+      const transparency = color.value.slice(7);
+      const item = menu.addItem("", () => {
+        input.value = colorValue;
+        input.dataset.transparency = transparency || undefined;
+      });
+      item.style.color = colorValue + transparency;
     }
 
     menu.addItem("…", () => {
