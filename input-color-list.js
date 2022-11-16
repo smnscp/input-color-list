@@ -18,13 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     for (let color of input.list.options) {
-      const colorValue = color.value.slice(0, 7);
-      const transparency = color.value.slice(7);
+      if (!/#([0-9a-f]{2}){3,4}/i.test(color.value)) {
+        console.warn(
+          `${color.value} is not a valid value for a color input! Use #rrggbb(aa) format.`
+        );
+        continue;
+      }
       const item = menu.addItem("", () => {
-        input.value = colorValue;
-        input.dataset.transparency = transparency || undefined;
+        input.value = color.value.slice(0, 7);
+        input.dataset.alpha = Number.parseInt(color.value.slice(7) || 'ff', 16) / 255;
       });
-      item.style.color = colorValue + transparency;
+      item.style.color = color.value;
     }
 
     menu.addItem("…", () => {
